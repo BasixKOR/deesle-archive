@@ -1,0 +1,31 @@
+{
+  "name": "deesle",
+  "version": "1.0.0",
+  "description": "Open-source version of the seed (namu.wiki)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deesle/deesle.git"
+  },
+  "keywords": [
+    "deesle",
+    "namuwiki",
+    "namumark"
+  ],
+  "author": "BasixKOR",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deesle/deesle/issues"
+  },
+  "homepage": "https://github.com/deesle/deesle#readme",
+  "dependencies": {
+    "hapi": "^15.0.3",
+    "hoek": "^4.0.2",
+    "pug": "^2.0.0-beta6",
+    "vision": "^4.1.0"
+  }
+}
