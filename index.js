@@ -2,11 +2,21 @@
 // encodeURIComponent() = 한글 버그시 사용
 
 const Hapi = require('hapi');
+const Inert = require('inert');
+const Hoek = require('hoek');
 const handlers = {
     wiki: require(`${___dirname}/routes/wiki`)
 }
 
-const server = new Hapi.Server();
+const server = new Hapi.Server({
+    connections: {
+        routes: {
+            files: {
+                relativeTo: `${__dirname}/public`
+            }
+        }
+    }
+});
 server.register(require('vision'), (err) => {
     Hoek.assert(!err, err); // 나름대로 에러 방지
 
@@ -16,9 +26,20 @@ server.register(require('vision'), (err) => {
         },
         relativeTo: __dirname,
         path: 'views'
-    });
+    }); // Pug(Jade) 사용
 
     server.connection({ port: process.env.PORT || 3000 });
+    server.route({
+        method: 'GET',
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: '.',
+                redirectToSlash: true,
+                index: true
+            }
+        }
+    });
     server.route({ method: 'GET', path: '/', handler: handlers.wiki.root }); // 대문으로 가게 설정
     server.route({
         method: 'GET',

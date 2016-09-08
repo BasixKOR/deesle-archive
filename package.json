@@ -25,6 +25,8 @@
   "dependencies": {
     "hapi": "^15.0.3",
     "hoek": "^4.0.2",
+    "inert": "^4.0.2",
+    "mongoose": "^4.6.0",
     "pug": "^2.0.0-beta6",
     "vision": "^4.1.0"
   }
