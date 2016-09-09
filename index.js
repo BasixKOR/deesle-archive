@@ -15,7 +15,10 @@ const handlers = {
 const server = new Hapi.Server();
 
 var db = mongoose.connection;
-db.on('error', console.error);
+db.on('error', function(err) {
+    console.error(err);
+    process.exit(1)
+});
 db.once('open', function(){
     // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
