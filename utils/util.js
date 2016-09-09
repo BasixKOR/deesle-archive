@@ -1,8 +1,8 @@
 module.exports = {
-    "directoryRoute": function(dirname) {
+    "directoryRoute": function(dirname, path = '/{param*}') {
         return {
             method: 'GET',
-            path: '/{param*}',
+            path: path,
             handler: {
                 directory: {
                     path: dirname

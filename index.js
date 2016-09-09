@@ -37,7 +37,7 @@ function mainHandler(err) {
 
     server.connection({ port: process.env.PORT || 3000 });
 
-    server.route(util.directoryRoute(`${__dirname}/public`))
+    server.route(util.directoryRoute(`${__dirname}/public`, '/public/{param*}'))
     server.route(util.directoryRoute(`${__dirname}/bower_components`))
 
     server.route({ method: 'GET', path: '/', handler: handlers.wiki.root }); // 대문으로 가게 설정
