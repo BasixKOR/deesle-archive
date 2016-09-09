@@ -1,5 +1,6 @@
 {
     "mongoUrl": "mongodb://localhost:27017/deesle",
     
-    "name": "deesle"
+    "name": "deesle",
+    "frontPage": "Welcome"
 }
