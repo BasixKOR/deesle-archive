@@ -22,7 +22,7 @@ html
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand(href='#')= setting.name
+                a.navbar-brand(href='#')= pagename || setting.name
                 #navbar.collapse.navbar-collapse
                     ul.nav.navbar-nav
                         block menu
@@ -32,8 +32,8 @@ html
                                 a(href='#about') About
                             li
                                 a(href='#contact') Contact
-        .container
-            block content
+        block content
+            .container
 
 
         // 항상 마지막 줄에 놔두세요

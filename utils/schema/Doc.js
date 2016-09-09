@@ -7,9 +7,12 @@ var schema = new Schema({
       unique: true
   },
   updated: { type: Date, default: Date.now },
-  doc: [String],
+  doc: {
+    type: [String],
+    required: true
+  },
   data: {
     locked: Boolean
   }
 })
-exports = mongoose.model('Doc', schema);
+module.exports = mongoose.model('Doc', schema);

@@ -2,5 +2,7 @@
     "mongoUrl": "mongodb://localhost:27017/deesle",
     
     "name": "deesle",
-    "frontPage": "Welcome"
+    "frontPage": "Welcome",
+    "needSetup": true,
+    "password": "[SHA-256 hash]"
 }
