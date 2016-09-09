@@ -36,7 +36,10 @@ function mainHandler(err) {
     }); // Pug(Jade) 사용
 
     server.connection({ port: process.env.PORT || 3000 });
-    server.route(util.directoryRoute(`${__dirname}/setting`))
+
+    server.route(util.directoryRoute(`${__dirname}/public`))
+    server.route(util.directoryRoute(`${__dirname}/bower_components`))
+
     server.route({ method: 'GET', path: '/', handler: handlers.wiki.root }); // 대문으로 가게 설정
     server.route({
         method: 'GET',

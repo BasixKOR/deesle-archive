@@ -1,3 +1,5 @@
 {
-    "mongoUrl": "mongodb://localhost:27017/deesle"
+    "mongoUrl": "mongodb://localhost:27017/deesle",
+    
+    "name": "deesle"
 }
