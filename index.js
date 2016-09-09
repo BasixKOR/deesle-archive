@@ -22,16 +22,15 @@ db.once('open', function(){
 });
 mongoose.connect(setting.mongoUrl);
 
-server.register(require('vision'), (err) => {
+function mainHandler(err) {
     Hoek.assert(!err, err); // 나름대로 에러 방지
-
     server.views({
         engines: {
             html: require('pug')
         },
         relativeTo: __dirname,
         path: 'views'
-    });// Pug(Jade) 사용
+    }); // Pug(Jade) 사용
 
     server.connection({ port: process.env.PORT || 3000 });
     server.route(util.directoryRoute(`${__dirname}/setting`))
@@ -48,5 +47,10 @@ server.register(require('vision'), (err) => {
             throw err;
         }
         console.log(`Server running at: ${server.info.uri}`);
-    });
+    })
+}
+
+server.register(require('vision'), (err) => {
+    Hoek.assert(!err, err); // 나름대로 에러 방지   
+    server.register(require('inert'), mainHandler);
 });
