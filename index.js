@@ -42,12 +42,16 @@ function mainHandler(err) {
     server.route(util.directoryRoute(`${__dirname}/bower_components`))
 
     // 위키 기본 기능
-    server.route({ method: 'GET', path: '/', handler: handlers.wiki.root }); // 대문으로 가게 설정 또는 설치 화면
-    server.route({ method: 'GET', path: '/w/{name}', handler: handlers.wiki.view }); // 문서 보기
+    server.route([
+        { method: 'GET', path: '/', handler: handlers.wiki.root }, // 대문으로 가게 설정 또는 설치 화면
+        { method: 'GET', path: '/w/{name}', handler: handlers.wiki.view } // 문서 보기
+    ]);
 
     // 설치
-    server.route({ method: 'GET', path: '/setup', handler: handlers.setup.root });
-    server.route({ method: 'POST', path: '/setup', handler: handlers.setup.begin });
+    server.route([
+        { method: 'GET', path: '/setup', handler: handlers.setup.root },
+        { method: 'POST', path: '/setup', handler: handlers.setup.begin }
+    ]);
 
     server.start((err) => {
         if (err) {
