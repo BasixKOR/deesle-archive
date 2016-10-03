@@ -5,8 +5,8 @@ const mongoose = require("mongoose"),
 
 var UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
+    email: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
-    nick: { type: String, required: true },
     admin: Boolean,
     perm: Schema.Types.Mixed
 });
