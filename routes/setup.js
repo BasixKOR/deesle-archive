@@ -11,5 +11,8 @@ module.exports = {
         return reply.view('setup', {
             pagename: "deesle 설치"
         })
+    },
+    "begin": function(request, reply) {
+        
     }
 }

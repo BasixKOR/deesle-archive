@@ -1,3 +1,6 @@
+var htmlEncode = require('js-htmlencode').htmlEncode;
+var htmlDecode = require('js-htmlencode').htmlDecode;
+
 module.exports = {
     parse: function(nmText, cb) {
         let parsed
@@ -6,12 +9,14 @@ module.exports = {
 
         const process = {
             "preprocess": function(d) {
-                var cd = d
+                var cd = htmlEncode(d) // HTML 문법 이외 HTML 적용 방지임
                 cd.replace(/([\n]+)/g, "<p>$1</p>")
+                cd.replace("[br]", "<br>")
                 return cd
             },
             "blockmarkup": function(d) {
                 var cd = d
+                cd.replace(/**([^*]+)**/g, "<strong>$1</strong>")
                 return cd
             },
             "markup": function(d) {

@@ -42,7 +42,7 @@ function mainHandler(err) {
     server.route(util.directoryRoute(`${__dirname}/bower_components`))
 
     // 위키 기본 기능
-    server.route({ method: 'GET', path: '/', handler: handlers.wiki.root }); // 대문으로 가게 설정
+    server.route({ method: 'GET', path: '/', handler: handlers.wiki.root }); // 대문으로 가게 설정 또는 설치 화면
     server.route({ method: 'GET', path: '/w/{name}', handler: handlers.wiki.view }); // 문서 보기
 
     // 설치
