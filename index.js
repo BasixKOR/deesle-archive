@@ -47,7 +47,7 @@ function mainHandler(err) {
 
     // 설치
     server.route({ method: 'GET', path: '/setup', handler: handlers.setup.root });
-    //server.route({ method: 'GET', path: '/setup/begin', handler: handlers.setup.begin });
+    server.route({ method: 'POST', path: '/setup', handler: handlers.setup.begin });
 
     server.start((err) => {
         if (err) {
