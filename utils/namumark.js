@@ -1,8 +1,8 @@
 var htmlEncode = require('js-htmlencode').htmlEncode;
 var htmlDecode = require('js-htmlencode').htmlDecode;
 
-module.exports = {
-    parse: function(nmText, cb) {
+module.exports = 
+    function(nmText, cb) {
         let parsed
         let TOC = []
         let result = []
@@ -16,7 +16,7 @@ module.exports = {
             },
             "blockmarkup": function(d) {
                 var cd = d
-                cd.replace(/**([^*]+)**/g, "<strong>$1</strong>")
+                cd.replace(/'''([^']+)'''/g, "<strong>$1</strong>")
                 return cd
             },
             "markup": function(d) {
@@ -28,5 +28,6 @@ module.exports = {
         parsed = process.preprocess(nmText) // br 처리 등등
         parsed = process.blockmarkup(parsed) // 굵게 등의 간단한 문법
         parsed = process.markup(parsed) // 일부 복잡한 문법
+
+        cb(parsed) // 콜백을 보낸다
     }
-}
