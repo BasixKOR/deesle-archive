@@ -21,24 +21,29 @@ module.exports = {
     "begin": function(request, reply) {
         let config = { needSetup: false }
         let data = request.params
-
-        var admin = new User({
-            username: data.username,
-            email: data.email,
-            password: data.password,
-            admin: true
-        });
-
-        admin.save(function (err) {
+        User.remove({}, function(err) { 
             !err || console.error(err)
+            Doc.remove({}, function(err) {
+                !err || console.error(err)
 
-            config.mongoUrl = data.mongoUrl
-            config.frontPage = data.frontPage 
+                var admin = new User({
+                    username: data.username,
+                    email: data.email,
+                    password: data.password,
+                    admin: true
+                });
+                admin.save(function (err) {
+                    !err || console.error(err)
 
-            jsonfile.writeFile(`${__dirname}/../setting`, config, {spaces: 2}, function(err) {
-                !err || console.error(err) // 에러가 있는 경우 출력
-                reply('설치되었습니다.').redirect().location('')
-            })
+                    config.mongoUrl = data.mongoUrl
+                    config.frontPage = data.frontPage 
+
+                    jsonfile.writeFile(`${__dirname}/../setting`, config, {spaces: 2}, function(err) {
+                        !err || console.error(err) // 에러가 있는 경우 출력
+                        reply('설치되었습니다.').redirect().location('')
+                    })
+                });
+            });
         });
     }
 }
