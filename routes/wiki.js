@@ -1,4 +1,5 @@
 'use strict';
+const _ = require('underscore')
 
 const Hoek = require('hoek');
 const mongoose = require('mongoose');
