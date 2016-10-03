@@ -2,6 +2,7 @@
 
 const Hoek = require('hoek');
 const mongoose = require('mongoose');
+const jsonfile = require('jsonfile');
 const Doc = require(`${__dirname}/../utils/schema/Doc`)
 const setting = require(`${__dirname}/../setting`)
 
@@ -13,6 +14,11 @@ module.exports = {
         })
     },
     "begin": function(request, reply) {
+        let config = { needSetup: false }
         
+ 
+        jsonfile.writeFile(`${__dirname}/../setting`, config, {spaces: 2}, function(err) {
+            !err || console.error(err) // 에러가 있는 경우 출력
+        })
     }
 }
