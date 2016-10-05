@@ -1,4 +1,5 @@
 'use strict';
+const _ = require('underscore')
 
 const Hoek = require('hoek');
 const mongoose = require('mongoose');
@@ -21,9 +22,9 @@ module.exports = {
     "begin": function(request, reply) {
         let config = { needSetup: false }
         let data = request.params
-        User.remove({}, function(err) { 
+        User.remove({}, function(err) { //리셋
             !err || console.error(err)
-            Doc.remove({}, function(err) {
+            Doc.remove({}, function(err) { // 리셋
                 !err || console.error(err)
 
                 var admin = new User({
@@ -31,7 +32,7 @@ module.exports = {
                     email: data.email,
                     password: data.password,
                     admin: true
-                });
+                }); // 어드민 계정 생성
                 admin.save(function (err) {
                     !err || console.error(err)
 
@@ -41,8 +42,8 @@ module.exports = {
                     jsonfile.writeFile(`${__dirname}/../setting`, config, {spaces: 2}, function(err) {
                         !err || console.error(err) // 에러가 있는 경우 출력
                         reply('설치되었습니다.').redirect().location('')
-                    })
-                });
+                    }) // config 저장
+                }); // 계정 저장
             });
         });
     }
