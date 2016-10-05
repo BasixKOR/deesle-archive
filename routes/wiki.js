@@ -17,10 +17,10 @@ module.exports = {
     // GET /w/{name} == 위키 페이지로 연결시킨다.
     // request.params.name == 문서명
     "view": function(request, reply) {
-        Doc.find({name: request.params.name}, function(err, docs){
+        Doc.findOne({name: request.params.name}, function(err, docs){
             !err || console.error(err)
 
-            namumark(_.last(docs[0].doc), function(parsed) {
+            namumark(_.last(docs.doc), function(parsed) {
                 reply.view('view', {
                     name: request.params.name,
                     content: parsed
