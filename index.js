@@ -30,7 +30,7 @@ function mainHandler(err) {
     Hoek.assert(!err, err); // 나름대로 에러 방지
     server.views({
         engines: {
-            html: require('pug')
+            pug: require('pug')
         },
         relativeTo: __dirname,
         path: 'views'
