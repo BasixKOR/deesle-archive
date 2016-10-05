@@ -1,6 +1,7 @@
 'use strict';
 const _ = require('underscore')
 
+const namumark = require(`${__dirname}/../utils/namumark`)
 const Hoek = require('hoek');
 const mongoose = require('mongoose');
 const Doc = require(`${__dirname}/../utils/schema/Doc`)
@@ -16,6 +17,15 @@ module.exports = {
     // GET /w/{name} == 위키 페이지로 연결시킨다.
     // request.params.name == 문서명
     "view": function(request, reply) {
-        
+        Doc.find({name: request.params.name}, function(err, docs){
+            !err || console.error(err)
+
+            namumark(_.last(docs[0].doc), function(parsed) {
+                reply.view('view', {
+                    name: request.params.name,
+                    content: parsed
+                })
+            })
+        })
     }
 }
