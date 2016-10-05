@@ -19,6 +19,7 @@ module.exports = {
     "view": function(request, reply) {
         Doc.findOne({name: request.params.name}, function(err, docs){
             !err || console.error(err)
+            docs || reply.redirect('')
 
             namumark(_.last(docs.doc), function(parsed) {
                 reply.view('view', {
