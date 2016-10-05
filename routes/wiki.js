@@ -18,9 +18,13 @@ module.exports = {
     // request.params.name == 문서명
     "view": function(request, reply) {
         Doc.findOne({name: request.params.name}, function(err, docs){
-            !err || console.error(err)
-            docs.doc || reply.redirect('')
-
+            if(err) console.error(err)
+            if(_.isNull(docs)) {
+                return reply.view('view', {
+                    name: request.params.name,
+                    content: "404 Document Not Found"
+                }).code(404)
+            }
             namumark(_.last(docs.doc), function(parsed) {
                 reply.view('view', {
                     name: request.params.name,
