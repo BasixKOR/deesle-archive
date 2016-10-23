@@ -22,13 +22,15 @@ module.exports = {
             if(_.isNull(docs)) {
                 return reply.view('view', {
                     name: request.params.name,
-                    content: "404 Document Not Found"
+                    content: "404 Document Not Found",
+                    settings: setting
                 }).code(404)
             }
             namumark(_.last(docs.doc), function(parsed) {
                 reply.view('view', {
                     name: request.params.name,
-                    content: parsed
+                    content: parsed,
+                    settings: setting
                 })
             })
         })

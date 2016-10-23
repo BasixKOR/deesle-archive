@@ -13,7 +13,11 @@ const handlers = {
     setup: require(`${__dirname}/routes/setup`)
 }
 
-const server = new Hapi.Server();
+const server = new Hapi.Server({
+    debug: {
+        request: ['error']
+    }
+});
 
 var db = mongoose.connection;
 db.on('error', function(err) {

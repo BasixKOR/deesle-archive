@@ -13,14 +13,15 @@ module.exports = {
     "root": function(request, reply) {
         if(setting.needSetup) {
             return reply.view('setup', {
-                pagename: "deesle 설치"
+                pagename: "deesle 설치",
+                settings: setting
             })
         } else {
             reply('이미 설치되었습니다.').redirect().location('')
         }
     },
     "begin": function(request, reply) {
-        let config = { needSetup: false }
+        var config = { needSetup: false }
         let data = request.params
         User.remove({}, function(err) { //리셋
             !err || console.error(err)
@@ -37,11 +38,12 @@ module.exports = {
                     !err || console.error(err)
 
                     config.mongoUrl = data.mongoUrl
-                    config.frontPage = data.frontPage 
+                    config.frontPage = data.frontPage
+                    console.dir(request.params)
 
-                    jsonfile.writeFile(`${__dirname}/../setting`, config, {spaces: 2}, function(err) {
+                    jsonfile.writeFile(`${__dirname}/../setting.json`, config, {spaces: 2}, function(err) {
                         !err || console.error(err) // 에러가 있는 경우 출력
-                        reply('설치되었습니다.').redirect().location('')
+                        reply('설치되었습니다. 서버를 재시작해주세요.').redirect().location('')
                     }) // config 저장
                 }); // 계정 저장
             });

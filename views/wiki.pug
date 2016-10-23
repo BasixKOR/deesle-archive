@@ -1,5 +1,5 @@
-!!!html
-- const setting = require(`${__dirname}/setting`)
+doctype html
+- const setting = settings || require(`${__dirname}/setting`)
 html
     head
         meta(charset='UTF-8')
@@ -32,10 +32,11 @@ html
                                 a(href='#about') About
                             li
                                 a(href='#contact') Contact
+        div(style='height: 50px;')
         block content
             .container
 
 
         // 항상 마지막 줄에 놔두세요
-        script(src='/bootstrap/dist/3.3.2/js/bootstrap.min.js')
         script(src='/jquery/dist/jquery.min.js')
+        script(src='/bootstrap/dist/js/bootstrap.min.js')
