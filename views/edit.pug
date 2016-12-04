@@ -5,7 +5,7 @@ block content
         h1= name
         div!= content
 block menu
-    li.active
-        a(href='/w/' + name) 보기
     li
+        a(href='/w/' + name) 보기
+    li.active
         a(href='/edit/' + name) 편집
