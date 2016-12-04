@@ -49,7 +49,8 @@ function mainHandler(err) {
     // 위키 기본 기능
     server.route([
         { method: 'GET', path: '/', handler: handlers.wiki.root }, // 대문으로 가게 설정 또는 설치 화면
-        { method: 'GET', path: '/w/{name}', handler: handlers.wiki.view } // 문서 보기
+        { method: 'GET', path: '/w/{name}', handler: handlers.wiki.view }, // 문서 보기
+        { method: 'GET', path: '/edit/{name}', handler: handlers.wiki.edit } // 문서 보기
     ]);
 
     // 설치

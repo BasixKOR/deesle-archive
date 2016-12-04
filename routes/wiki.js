@@ -34,5 +34,32 @@ module.exports = {
                 })
             })
         })
+    },
+    // GET /edit/{name} == 위키 페이지를 편집합니다.
+    "edit": function(request, reply) {
+        Doc.findOne({name: request.params.name}).exec()
+            .then((doc) => {
+                if(_.isNull(doc)) {
+                    reply.view('edit', {
+                        name: request.params.name,
+                        content: "",
+                        settings: setting
+                    })
+                } else {
+                    reply.view('edit', {
+                        name: request.params.name,
+                        content: _.last(doc.doc),
+                        settings: setting
+                    })
+                }
+            })
+            .catch((err) => {
+                console.error(err)
+                reply.view('edit', {
+                    name: request.params.name,
+                    content: "오류가 발생했어요! 혹시 빈 문서가 아니라면, 다시 편집버튼을 눌러주세요!",
+                    settings: setting
+                })
+            })
     }
 }
