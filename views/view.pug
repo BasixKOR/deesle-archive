@@ -1,6 +1,11 @@
 extends wiki
 //- noblock menu
 block content
-    .container(style='background-color: rgb(238, 238, 238);')
+    .container(style='background-color: rgb(238, 238, 238); bottom: 0;')
         h1= name
         div!= content
+block menu
+    li.active
+        a(href='/w/' + name) 보기
+    li
+        a(href='/edit/' + name) 편집

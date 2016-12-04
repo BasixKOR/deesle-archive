@@ -22,31 +22,54 @@ module.exports = {
     },
     "begin": function(request, reply) {
         var config = { needSetup: false }
-        let data = request.params
-        User.remove({}, function(err) { //리셋
-            !err || console.error(err)
-            Doc.remove({}, function(err) { // 리셋
-                !err || console.error(err)
+        let data = request.payload
+        let saveFile = function (config) {
+            return new Promise(function(resolve, reject){
+                jsonfile.writeFile(`${__dirname}/../setting.json`, config, {spaces: 2}, function(err) {
+                    if (err) { reject(err) }
+                    else { resolve() }
+                })
+            })
+        } // jsonfile Promise 겍체. 파일을 저장한다
 
-                var admin = new User({
+        User.remove({}).exec()
+            .then(() => Doc.remove({}).exec())
+            .catch((err) => {
+                console.log("error while reset DB")
+                console.error(err)
+            })
+            .then(() => {
+                let admin = new User({
                     username: data.username,
                     email: data.email,
                     password: data.password,
                     admin: true
-                }); // 어드민 계정 생성
-                admin.save(function (err) {
-                    !err || console.error(err)
-
-                    config.mongoUrl = data.mongoUrl
-                    config.frontPage = data.frontPage
-                    console.dir(request.params)
-
-                    jsonfile.writeFile(`${__dirname}/../setting.json`, config, {spaces: 2}, function(err) {
-                        !err || console.error(err) // 에러가 있는 경우 출력
-                        reply('설치되었습니다. 서버를 재시작해주세요.').redirect().location('')
-                    }) // config 저장
-                }); // 계정 저장
-            });
-        });
+                });
+                return admin.save()
+            })
+            .then(() => {
+                let front = new Doc({
+                    name: data.frontPage,
+                    doc: ["기본 대문입니다."]
+                })
+                return front.save()
+            })
+            .catch((err) => {
+                console.log("유저 또는 대문 업데이트 중 오류")
+                console.error(err)
+            })
+            .then(() => saveFile({
+                name: data.wikiname,
+                needSetup: false,
+                mongoUrl: data.mongoUrl,
+                frontPage: data.frontPage,
+            }))
+            .catch((err) => {
+                console.log("JSON 저장 중 오류")
+                console.error(err)
+            })
+            .then(() => {
+                reply('설치되었습니다. 서버를 재시작해주세요.')
+            })
     }
 }

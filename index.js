@@ -25,6 +25,7 @@ db.on('error', function(err) {
     process.exit(1)
 });
 db.once('open', function(){
+    mongoose.Promise = global.Promise;
     // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
 });

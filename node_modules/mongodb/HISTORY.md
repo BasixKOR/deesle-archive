@@ -1,3 +1,32 @@
+2.2.11 2016-10-21
+-----------------
+* Updated mongodb-core to 2.0.13.
+  - Fire callback when topology was destroyed (Issue #147, https://github.com/vkarpov15).
+  - Refactoring to support pipelining ala 1.4.x branch will retaining the benefits of the growing/shrinking pool (Issue #146).
+  - Fix typo in serverHeartbeatFailed event name (Issue #143, https://github.com/jakesjews).
+  - NODE-798 Driver hangs on count command in replica set with one member (Issue #141, https://github.com/isayme).
+* Updated bson library to 0.5.6.
+  - Included cyclic dependency detection
+* Fix typo in serverHeartbeatFailed event name (Issue #1418, https://github.com/jakesjews).
+* NODE-824, readPreference "nearest" does not work when specified at collection level.
+* NODE-822, GridFSBucketWriteStream end method does not handle optional parameters.
+* NODE-823, GridFSBucketWriteStream end: callback is invoked with invalid parameters.
+* NODE-829, Using Start/End offset option in GridFSBucketReadStream doesn't return the right sized buffer.
+
+2.2.10 2016-09-15
+-----------------
+* Updated mongodb-core to 2.0.12.
+* fix debug logging message not printing server name.
+* fixed application metadata being sent by wrong ismaster.
+* NODE-812 Fixed mongos stall due to proxy monitoring ismaster failure causing reconnect.
+* NODE-818 Replicaset timeouts in initial connect sequence can "no primary found".
+* Updated bson library to 0.5.5.
+* Added DBPointer up conversion to DBRef.
+* MongoDB 3.4-RC Pass **appname** through MongoClient.connect uri or options to allow metadata to be passed.
+* MongoDB 3.4-RC Pass collation options on update, findOne, find, createIndex, aggregate.
+* MongoDB 3.4-RC Allow write concerns to be passed to all supporting server commands.
+* MongoDB 3.4-RC Allow passing of **servername** as SSL options to support SNI.
+
 2.2.9 2016-08-29
 ----------------
 * Updated mongodb-core to 2.0.11.

@@ -11,6 +11,9 @@ block content
     .container
         form(method='post',enctype='application/json')
             .form-group
+                label(for='username') 위키 이름
+                input#username.form-control(type='text', placeholder='당신이 열 위키의 이름은 무엇인가요?', name='wikiname')
+            .form-group
                 label(for='username') 관리자 ID
                 input#username.form-control(type='username', placeholder='ID를 입력하세요.', name='username')
             .form-group
