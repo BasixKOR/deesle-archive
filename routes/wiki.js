@@ -61,5 +61,10 @@ module.exports = {
                     settings: setting
                 })
             })
+    },
+    // POST /edit/{name} == 편집이 끝나고 데이터를 받아옵니다.
+    "edited": function(request, reply) {
+        
+        // reply('다시 문서로!').redirect().location(`w/${request.params.name}`)
     }
 }
