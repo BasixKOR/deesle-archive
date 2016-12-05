@@ -64,7 +64,11 @@ module.exports = {
     },
     // POST /edit/{name} == 편집이 끝나고 데이터를 받아옵니다.
     "edited": function(request, reply) {
-        
-        // reply('다시 문서로!').redirect().location(`w/${request.params.name}`)
+        Doc.findOne({name: request.params.name}).exec()
+            .then((doc) => {
+                doc.doc.push(request.payload.content)
+                return doc.save()
+            })
+            .then(() => reply('다시 문서로!').redirect().location(`/w/${request.params.name}`))
     }
 }

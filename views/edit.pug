@@ -3,7 +3,11 @@ extends wiki
 block content
     .container
         h1= name
-        div!= content
+        form(action="",method="POST")
+            .form-group
+                label(for='editor') 내용
+                textarea#editor.form-control(name='content', cols='40', rows='40', placeholder='비어 있네요.')!= content
+            button.btn.btn-default(type='submit') 제출
 block menu
     li
         a(href='/w/' + name) 보기
