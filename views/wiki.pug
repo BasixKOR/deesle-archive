@@ -30,10 +30,13 @@ html
                                 a(href='/') 대문으로
                     form.navbar-form.navbar-right(role='search',action="/search")
                         unless nosearch
-                            .input-group
-                                input.form-control(type='text', placeholder='Search for...')
-                                span.input-group-btn
-                                button.btn.btn-default(type='button') Go!
+                            form.navbar-form(action='search', method='GET')
+                                .input-group
+                                    input.form-control(type='text', placeholder='검색하기', name='q')
+                                    .input-group-btn
+                                        button.btn.btn-default(type='submit')
+                                            i.glyphicon.glyphicon-search
+
         div(style='height: 50px;')
         block content
             .container
