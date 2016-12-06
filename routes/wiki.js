@@ -70,5 +70,11 @@ module.exports = {
                 return doc.save()
             })
             .then(() => reply('다시 문서로!').redirect().location(`/w/${request.params.name}`))
+    },
+    "history": function(request, reply) {
+        Doc.findOne({name: request.params.name}).exec()
+            .then(doc => {
+                
+            })
     }
 }
