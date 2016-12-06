@@ -72,9 +72,14 @@ module.exports = {
             .then(() => reply('다시 문서로!').redirect().location(`/w/${request.params.name}`))
     },
     "history": function(request, reply) {
+        return reply('미구현').code(501)
+
         Doc.findOne({name: request.params.name}).exec()
             .then(doc => {
                 
             })
+    },
+    "search": function(request, reply) {
+        return reply('미구현').code(501)
     }
 }
