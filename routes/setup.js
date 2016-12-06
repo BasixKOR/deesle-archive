@@ -14,7 +14,8 @@ module.exports = {
         if(setting.needSetup) {
             return reply.view('setup', {
                 pagename: "deesle 설치",
-                settings: setting
+                settings: setting,
+                nosearch: true
             })
         } else {
             reply('이미 설치되었습니다.').redirect().location('')
