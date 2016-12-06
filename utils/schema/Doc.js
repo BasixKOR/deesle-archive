@@ -7,10 +7,10 @@ var schema = new Schema({
       unique: true
   },
   updated: { type: Date, default: Date.now },
-  doc: {
-    type: [String],
-    required: true
-  },
+  reversion: [{
+    content: {type: String, required: true},
+    editor: {type: String, required: true} // editor username
+  }],
   data: {
     locked: Boolean
   }
