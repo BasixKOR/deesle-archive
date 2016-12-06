@@ -26,7 +26,7 @@ module.exports = {
                     settings: setting
                 }).code(404)
             }
-            namumark(_.last(docs.doc), function(parsed) {
+            namumark(_.last(docs.reversion).content, function(parsed) {
                 reply.view('view', {
                     name: request.params.name,
                     content: parsed,
@@ -48,7 +48,7 @@ module.exports = {
                 } else {
                     reply.view('edit', {
                         name: request.params.name,
-                        content: _.last(doc.doc),
+                        content: _.last(doc.reversion).content,
                         settings: setting
                     })
                 }
@@ -66,7 +66,10 @@ module.exports = {
     "edited": function(request, reply) {
         Doc.findOne({name: request.params.name}).exec()
             .then((doc) => {
-                doc.doc.push(request.payload.content)
+                doc.reversion.push({
+                    content: request.payload.content,
+                    editor: request.info.address
+                })
                 return doc.save()
             })
             .then(() => reply('다시 문서로!').redirect().location(`/w/${request.params.name}`))

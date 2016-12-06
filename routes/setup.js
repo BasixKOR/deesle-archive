@@ -33,6 +33,13 @@ module.exports = {
             })
         } // jsonfile Promise 겍체. 파일을 저장한다
 
+        let admin = new User({
+            username: data.username,
+            email: data.email,
+            password: data.password,
+            admin: true
+        });
+
         User.remove({}).exec()
             .then(() => Doc.remove({}).exec())
             .catch((err) => {
@@ -40,18 +47,15 @@ module.exports = {
                 console.error(err)
             })
             .then(() => {
-                let admin = new User({
-                    username: data.username,
-                    email: data.email,
-                    password: data.password,
-                    admin: true
-                });
                 return admin.save()
             })
             .then(() => {
                 let front = new Doc({
                     name: data.frontPage,
-                    doc: ["기본 대문입니다."]
+                    reversion: [{
+                        content: "Deesle에 잘 오셧습니다!",
+                        editor: admin.username
+                    }]
                 })
                 return front.save()
             })
