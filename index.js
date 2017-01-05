@@ -7,6 +7,7 @@ const Hoek = require('hoek');
 const mongoose = require('mongoose');
 const setting = require(`${__dirname}/setting`)
 const util = require(`${__dirname}/utils/util`)
+const auth_vaildate = require(`${__dirname}/utils/authVaildate`)
 
 const handlers = {
     wiki: require(`${__dirname}/routes/wiki`),
@@ -72,5 +73,13 @@ function mainHandler(err) {
 
 server.register(require('vision'), (err) => {
     Hoek.assert(!err, err); // 나름대로 에러 방지   
-    server.register(require('inert'), mainHandler);
+    server.register(require('hapi-auth-jwt2'), (err) => {
+        Hoek.assert(!err, err)
+        server.auth.strategy('jwt-auth', 'jwt', { 
+            key: setting.key,          // Never Share your secret key 
+            validateFunc: auth_validate,            // validate function defined above 
+            verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm 
+        });
+        server.register(require('inert'), mainHandler)
+    });
 });
