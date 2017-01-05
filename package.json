@@ -4,7 +4,7 @@
   "description": "Open-source version of the seed (namu.wiki)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node index.js"
   },
   "repository": {
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/deesle/deesle#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "expect.js": "^0.3.1",
     "hapi": "^15.0.3",
     "hoek": "^4.0.2",
     "inert": "^4.0.2",
