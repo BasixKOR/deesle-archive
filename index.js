@@ -11,7 +11,8 @@ const auth_vaildate = require(`${__dirname}/utils/authVaildate`)
 
 const handlers = {
     wiki: require(`${__dirname}/routes/wiki`),
-    setup: require(`${__dirname}/routes/setup`)
+    setup: require(`${__dirname}/routes/setup`),
+    auth: require(`${__dirname}/routes/auth`)
 }
 
 const server = new Hapi.Server({
@@ -62,6 +63,15 @@ function mainHandler(err) {
         { method: 'GET', path: '/setup', handler: handlers.setup.root },
         { method: 'POST', path: '/setup', handler: handlers.setup.begin }
     ]);
+
+    server.route([
+        { method: 'GET', path: '/signin', handler: handlers.auth.signin, 
+            auth: { mode: 'try', strategy: 'jwt-auth' } 
+        },
+        { method: 'GET', path: '/signout', handler: handlers.auth.signout,
+            auth: { mode: 'required', strategy: 'jwt-auth' }
+        }
+    ])
 
     server.start((err) => {
         if (err) {
