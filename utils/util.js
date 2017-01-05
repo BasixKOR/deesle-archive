@@ -9,5 +9,8 @@ module.exports = {
                 }
             }
         }
+    },
+    auth(mode = 'required') {
+        return { mode: 'required', strategy: 'jwt-auth' }
     }
 }
