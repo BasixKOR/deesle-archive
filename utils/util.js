@@ -11,6 +11,6 @@ module.exports = {
         }
     },
     auth(mode = 'required') {
-        return { mode: 'required', strategy: 'jwt-auth' }
+        return { mode: mode, strategy: 'jwt-auth' }
     }
 }
