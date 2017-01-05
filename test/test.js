@@ -13,7 +13,7 @@ describe('util.js suite', function () {
     it('path should equal /{param*}', function () {
       expect(util.directoryRoute('test')).to.eql({
         method: 'GET',
-        path: '/{*param}',
+        path: '/{param*}',
         handler: { directory: { path: 'test' } }
       })
     })
