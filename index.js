@@ -70,7 +70,8 @@ function mainHandler(err) {
         },
         { method: 'GET', path: '/signout', handler: handlers.auth.signout,
             auth: { mode: 'required', strategy: 'jwt-auth' }
-        }
+        },
+        { method: 'GET', path: '/register', handler: handlers.auth.register }
     ])
 
     server.start((err) => {
