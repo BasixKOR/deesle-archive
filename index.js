@@ -53,7 +53,9 @@ function mainHandler(err) {
         { method: 'GET', path: '/', handler: handlers.wiki.root }, // 대문으로 가게 설정 또는 설치 화면
         { method: 'GET', path: '/w/{name}', handler: handlers.wiki.view }, // 문서 보기
         { method: 'GET', path: '/edit/{name}', handler: handlers.wiki.edit }, // 문서 편집
-        { method: 'POST', path: '/edit/{name}', handler: handlers.wiki.edited }, // 편집 완료 후 핸들러
+        { method: 'POST', path: '/edit/{name}', handler: handlers.wiki.edited,
+            auth: { mode: 'try', strategy: 'jwt-auth' }
+        },                                                                      // 편집 완료 후 핸들러
         { method: 'GET', path: '/history/{name}', handler: handlers.wiki.history }, // 역사보기
         { method: 'GET', path: '/search', handler}
     ]);
