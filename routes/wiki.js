@@ -1,5 +1,5 @@
 'use strict';
-const _ = require('underscore')
+const _ = require('loadash')
 
 const namumark = require(`${__dirname}/../utils/namumark`)
 const Hoek = require('hoek');
