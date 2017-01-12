@@ -1,5 +1,6 @@
 var expect = require('expect.js');
 var util = require('../utils/util')
+const auth_vaildate = require(`../utils/authVaildate`)
 
 describe('util.js suite', function () {
   describe('#directoryRoute(dirname, path)', function() {
@@ -28,5 +29,10 @@ describe('util.js suite', function () {
     it('mode should equals "required"', function () {
       expect(util.auth()).to.eql({mode: 'required', strategy: 'jwt-auth'})
     })
+  })
+})
+describe('authVaildate.js suite', function() {
+  it('should callback with null, true', function() {
+    
   })
 })
