@@ -1,5 +1,5 @@
 'use strict';
-const _ = require('underscore')
+const _ = require('loadash')
 
 const Hoek = require('hoek');
 const mongoose = require('mongoose');
