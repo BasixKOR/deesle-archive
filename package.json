@@ -34,6 +34,7 @@
     "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.6.0",
     "pug": "^2.0.0-beta6",
+    "tokenizr": "^1.1.1",
     "underscore": "^1.8.3",
     "vision": "^4.1.0"
   }

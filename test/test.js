@@ -1,6 +1,6 @@
 var expect = require('expect.js');
 var util = require('../utils/util')
-const auth_vaildate = require(`../utils/authVaildate`)
+const namumark = require(`../utils/namumark`)
 
 describe('util.js suite', function () {
   describe('#directoryRoute(dirname, path)', function() {
@@ -31,8 +31,10 @@ describe('util.js suite', function () {
     })
   })
 })
-describe('authVaildate.js suite', function() {
-  it('should callback with null, true', function() {
-    
+describe('namumark suite', function() {
+  it('result should be like <p><strong></strong></p>', function() {
+    namumark("tokenizr '''test'''", (err, value) => {
+      expect(value).to.equal('tokenizr <strong>test</strong>')
+    })
   })
 })
