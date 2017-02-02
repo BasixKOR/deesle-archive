@@ -53,7 +53,7 @@ function mainHandler(err) {
         { method: 'GET', path: '/edit/{name}', handler: handlers.wiki.edit }, // 문서 편집
         { method: 'POST', path: '/edit/{name}', handler: handlers.wiki.edited }, // 편집 완료 후 핸들러
         { method: 'GET', path: '/history/{name}', handler: handlers.wiki.history }, // 역사보기
-        { method: 'GET', path: '/search', handler}
+//        { method: 'GET', path: '/search', handler}
     ]);
 
     // 설치
