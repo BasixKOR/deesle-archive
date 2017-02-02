@@ -28,6 +28,11 @@ db.once('open', function(){
     mongoose.Promise = global.Promise;
     // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
+
+    server.register(require('vision'), (err) => {
+        Hoek.assert(!err, err); // 나름대로 에러 방지   
+        server.register(require('inert'), mainHandler);
+    });
 });
 mongoose.connect(setting.mongoUrl);
 
@@ -69,8 +74,3 @@ function mainHandler(err) {
         console.log(`Server running at: ${server.info.uri}`);
     })
 }
-
-server.register(require('vision'), (err) => {
-    Hoek.assert(!err, err); // 나름대로 에러 방지   
-    server.register(require('inert'), mainHandler);
-});
