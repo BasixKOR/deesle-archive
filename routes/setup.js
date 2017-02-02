@@ -1,5 +1,5 @@
 'use strict';
-const _ = require('loadash')
+const _ = require('lodash')
 
 const Hoek = require('hoek');
 const mongoose = require('mongoose');
