@@ -7,10 +7,12 @@ const Hoek = require('hoek');
 const mongoose = require('mongoose');
 const setting = require(`${__dirname}/setting`)
 const util = require(`${__dirname}/utils/util`)
+const auth_vaildate = require(`${__dirname}/utils/authVaildate`)
 
 const handlers = {
     wiki: require(`${__dirname}/routes/wiki`),
-    setup: require(`${__dirname}/routes/setup`)
+    setup: require(`${__dirname}/routes/setup`),
+    auth: require(`${__dirname}/routes/auth`)
 }
 
 const server = new Hapi.Server({
@@ -30,9 +32,17 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 
     server.register(require('vision'), (err) => {
-        Hoek.assert(!err, err); // 나름대로 에러 방지   
-        server.register(require('inert'), mainHandler);
+    Hoek.assert(!err, err); // 나름대로 에러 방지   
+    server.register(require('hapi-auth-jwt2'), (err) => {
+        Hoek.assert(!err, err)
+        server.auth.strategy('jwt-auth', 'jwt', { 
+            key: setting.key,          // Never Share your secret key 
+            validateFunc: auth_validate,            // validate function defined above 
+            verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm 
+        });
+        server.register(require('inert'), mainHandler)
     });
+});
 });
 mongoose.connect(setting.mongoUrl);
 
@@ -56,7 +66,7 @@ function mainHandler(err) {
         { method: 'GET', path: '/', handler: handlers.wiki.root }, // 대문으로 가게 설정 또는 설치 화면
         { method: 'GET', path: '/w/{name}', handler: handlers.wiki.view }, // 문서 보기
         { method: 'GET', path: '/edit/{name}', handler: handlers.wiki.edit }, // 문서 편집
-        { method: 'POST', path: '/edit/{name}', handler: handlers.wiki.edited }, // 편집 완료 후 핸들러
+        { method: 'POST', path: '/edit/{name}', handler: handlers.wiki.edited, auth: util.auth('try') }, // 편집 완료 후 핸들러
         { method: 'GET', path: '/history/{name}', handler: handlers.wiki.history }, // 역사보기
 //        { method: 'GET', path: '/search', handler}
     ]);
@@ -66,6 +76,12 @@ function mainHandler(err) {
         { method: 'GET', path: '/setup', handler: handlers.setup.root },
         { method: 'POST', path: '/setup', handler: handlers.setup.begin }
     ]);
+
+    server.route([
+        { method: 'GET', path: '/signin', handler: handlers.auth.signin, auth: util.auth('try') },
+        { method: 'GET', path: '/signout', handler: handlers.auth.signout, auth: util.auth() },
+        { method: 'GET', path: '/register', handler: handlers.auth.register }
+    ])
 
     server.start((err) => {
         if (err) {
