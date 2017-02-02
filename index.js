@@ -30,6 +30,19 @@ db.once('open', function(){
     mongoose.Promise = global.Promise;
     // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
+
+    server.register(require('vision'), (err) => {
+    Hoek.assert(!err, err); // 나름대로 에러 방지   
+    server.register(require('hapi-auth-jwt2'), (err) => {
+        Hoek.assert(!err, err)
+        server.auth.strategy('jwt-auth', 'jwt', { 
+            key: setting.key,          // Never Share your secret key 
+            validateFunc: auth_validate,            // validate function defined above 
+            verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm 
+        });
+        server.register(require('inert'), mainHandler)
+    });
+});
 });
 mongoose.connect(setting.mongoUrl);
 
@@ -55,7 +68,7 @@ function mainHandler(err) {
         { method: 'GET', path: '/edit/{name}', handler: handlers.wiki.edit }, // 문서 편집
         { method: 'POST', path: '/edit/{name}', handler: handlers.wiki.edited, auth: util.auth('try') }, // 편집 완료 후 핸들러
         { method: 'GET', path: '/history/{name}', handler: handlers.wiki.history }, // 역사보기
-        { method: 'GET', path: '/search', handler}
+//        { method: 'GET', path: '/search', handler}
     ]);
 
     // 설치
@@ -77,16 +90,3 @@ function mainHandler(err) {
         console.log(`Server running at: ${server.info.uri}`);
     })
 }
-
-server.register(require('vision'), (err) => {
-    Hoek.assert(!err, err); // 나름대로 에러 방지   
-    server.register(require('hapi-auth-jwt2'), (err) => {
-        Hoek.assert(!err, err)
-        server.auth.strategy('jwt-auth', 'jwt', { 
-            key: setting.key,          // Never Share your secret key 
-            validateFunc: auth_validate,            // validate function defined above 
-            verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm 
-        });
-        server.register(require('inert'), mainHandler)
-    });
-});
