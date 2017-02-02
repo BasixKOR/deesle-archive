@@ -33,7 +33,7 @@ describe('util.js suite', function () {
 })
 describe('namumark suite', function() {
   it('result should be like <p><strong></strong></p>', function() {
-    namumark("tokenizr '''test'''", (err, value) => {
+    namumark("tokenizr '''test'''\n\n", (err, value) => {
       expect(value).to.equal('tokenizr <strong>test</strong>')
     })
   })
