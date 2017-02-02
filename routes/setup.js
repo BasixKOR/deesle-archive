@@ -68,6 +68,7 @@ module.exports = {
                 needSetup: false,
                 mongoUrl: data.mongoUrl,
                 frontPage: data.frontPage,
+                key: require('crypto').randomBytes(256).toString('base64')
             }))
             .catch((err) => {
                 console.log("JSON 저장 중 오류")
