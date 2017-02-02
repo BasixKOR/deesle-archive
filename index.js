@@ -32,17 +32,12 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 
     server.register(require('vision'), (err) => {
-    Hoek.assert(!err, err); // 나름대로 에러 방지   
-    server.register(require('hapi-auth-jwt2'), (err) => {
-        Hoek.assert(!err, err)
-        server.auth.strategy('jwt-auth', 'jwt', { 
-            key: setting.key,          // Never Share your secret key 
-            validateFunc: auth_validate,            // validate function defined above 
-            verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm 
+        Hoek.assert(!err, err); // 나름대로 에러 방지   
+        server.register(require('hapi-auth-jwt2'), (err) => {
+            Hoek.assert(!err, err)
+            server.register(require('inert'), mainHandler)
         });
-        server.register(require('inert'), mainHandler)
     });
-});
 });
 mongoose.connect(setting.mongoUrl);
 
@@ -57,6 +52,12 @@ function mainHandler(err) {
     }); // Pug(Jade) 사용
 
     server.connection({ port: process.env.PORT || 3000 });
+
+    server.auth.strategy('jwt-auth', 'jwt', { 
+        key: setting.key,          // Never Share your secret key 
+        validateFunc: auth_validate,            // validate function defined above 
+        verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm 
+    });
 
     server.route(util.directoryRoute(`${__dirname}/public`, '/public/{param*}'))
     server.route(util.directoryRoute(`${__dirname}/bower_components`))
@@ -80,7 +81,7 @@ function mainHandler(err) {
     server.route([
         { method: 'GET', path: '/signin', handler: handlers.auth.signin, auth: util.auth('try') },
         { method: 'GET', path: '/signout', handler: handlers.auth.signout, auth: util.auth() },
-        { method: 'GET', path: '/register', handler: handlers.auth.register }
+        { method: 'GET', path: '/register', handler: handlers.auth.register, auth: util.auth('try') }
     ])
 
     server.start((err) => {
