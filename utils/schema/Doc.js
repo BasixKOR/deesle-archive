@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 var schema = new Schema({
   name: {
-      type: String,
-      index: true,
-      unique: true
+    type: String,
+    index: true,
+    unique: true
   },
   updated: { type: Date, default: Date.now },
   reversion: [{
@@ -15,4 +15,4 @@ var schema = new Schema({
     locked: Boolean
   }
 })
-module.exports = mongoose.model('Doc', schema);
+module.exports = mongoose.model('Doc', schema)

@@ -1,9 +1,9 @@
-var expect = require('expect.js');
+var expect = require('expect.js')
 var util = require('../utils/util')
-const auth_vaildate = require(`../utils/authVaildate`)
+const authVaildate = require(`../utils/authVaildate`) // eslint-disable-line no-unused-vars
 
 describe('util.js suite', function () {
-  describe('#directoryRoute(dirname, path)', function() {
+  describe('#directoryRoute(dirname, path)', function () {
     it('should return correct route object', function () {
       expect(util.directoryRoute('test', 'test')).to.eql({
         method: 'GET',
@@ -20,8 +20,8 @@ describe('util.js suite', function () {
     })
   })
 
-  describe('#auth(mode)', function() {
-    it('should return correct auth object', function() {
+  describe('#auth(mode)', function () {
+    it('should return correct auth object', function () {
       expect(util.auth('test')).to.eql({
         mode: 'test', strategy: 'jwt-auth'
       })
@@ -31,8 +31,8 @@ describe('util.js suite', function () {
     })
   })
 })
-describe('authVaildate.js suite', function() {
-  it('should callback with null, true', function() {
-    
+describe('authVaildate.js suite', function () {
+  it('should callback with null, true', function () {
+
   })
 })
