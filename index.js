@@ -28,6 +28,7 @@ db.once('open', function () {
   mongoose.Promise = global.Promise
   console.log('Connected to mongod server')
 
+  server.connection({ port: process.env.PORT || 3000 })
   server.register(require('vision'), (err) => {
     Hoek.assert(!err, err) // 나름대로 에러 방지
     server.register(require('hapi-auth-jwt2'), (err) => {
@@ -47,8 +48,6 @@ function mainHandler (err) {
     relativeTo: __dirname,
     path: 'views'
   }) // Pug(Jade) 사용
-
-  server.connection({ port: process.env.PORT || 3000 })
 
   server.auth.strategy('jwt-auth', 'jwt', {
     key: setting.key,          // Never Share your secret key
@@ -80,9 +79,8 @@ function mainHandler (err) {
     { method: 'GET', path: '/signout', handler: handlers.auth.signout, auth: util.auth() },
     { method: 'GET', path: '/register', handler: handlers.auth.register, auth: util.auth('try') }
   ])
-
-  server.start(err => {
-    if (err) throw err
-    console.log(`Server running at: ${server.info.uri}`)
-  })
 }
+server.start(err => {
+  if (err) throw err
+  console.log(`Server running at: ${server.info.uri}`)
+})
