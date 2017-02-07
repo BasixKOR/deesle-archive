@@ -12,8 +12,8 @@ module.exports = {
     }
     reply('대문으로 가세요.').redirect().location(`w/${setting.frontPage}`) // 설치되었을시 대문으로 보냅니다.
   },
-    // GET /w/{name} == 위키 페이지로 연결시킨다.
-    // request.params.name == 문서명
+  // GET /w/{name} == 위키 페이지로 연결시킨다.
+  // request.params.name == 문서명
   'view': function (request, reply) {
     Doc.findOne({name: request.params.name}, function (err, docs) {
       if (err) console.error(err)
@@ -33,7 +33,7 @@ module.exports = {
       })
     })
   },
-    // GET /edit/{name} == 위키 페이지를 편집합니다.
+  // GET /edit/{name} == 위키 페이지를 편집합니다.
   'edit': function (request, reply) {
     Doc.findOne({name: request.params.name}).exec()
             .then((doc) => {
@@ -60,7 +60,7 @@ module.exports = {
               })
             })
   },
-    // POST /edit/{name} == 편집이 끝나고 데이터를 받아옵니다.
+  // POST /edit/{name} == 편집이 끝나고 데이터를 받아옵니다.
   'edited': function (request, reply) {
     Doc.findOne({name: request.params.name}).exec()
       .then((doc) => {
