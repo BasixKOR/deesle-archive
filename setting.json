@@ -1,6 +1,0 @@
-{
-  "name": "deesle",
-  "needSetup": false,
-  "mongoUrl": "mongodb://127.0.0.1/deesle",
-  "frontPage": "Welcome"
-}

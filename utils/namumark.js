@@ -17,5 +17,6 @@ module.exports =
         lexer.debug = true
         lexer.input(nmText.replace(/(.+)\n\n/g, "<p>$1</p>"))
         let result = lexer.tokens()
-        cb(null, result.map(n => n.value).join(''), result) // 콜백을 보낸다
+        //cb(null, result.map(n => n.value).join(''), result) // 콜백을 보낸다
+        cb(nmTest) // 작동을 위한 임시 처리
     }

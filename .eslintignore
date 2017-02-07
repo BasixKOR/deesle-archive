@@ -1,0 +1,5 @@
+node_modules/**
+bower_modules/**
+*.md
+*.json
+reset

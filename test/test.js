@@ -1,9 +1,10 @@
-var expect = require('expect.js');
+var expect = require('expect.js')
 var util = require('../utils/util')
 const namumark = require(`../utils/namumark`)
+const authVaildate = require(`../utils/authVaildate`) // eslint-disable-line no-unused-vars
 
 describe('util.js suite', function () {
-  describe('#directoryRoute(dirname, path)', function() {
+  describe('#directoryRoute(dirname, path)', function () {
     it('should return correct route object', function () {
       expect(util.directoryRoute('test', 'test')).to.eql({
         method: 'GET',
@@ -20,8 +21,8 @@ describe('util.js suite', function () {
     })
   })
 
-  describe('#auth(mode)', function() {
-    it('should return correct auth object', function() {
+  describe('#auth(mode)', function () {
+    it('should return correct auth object', function () {
       expect(util.auth('test')).to.eql({
         mode: 'test', strategy: 'jwt-auth'
       })
@@ -36,5 +37,9 @@ describe('namumark suite', function() {
     namumark("tokenizr '''test'''\n\n", (err, value) => {
       expect(value).to.equal('tokenizr <strong>test</strong>')
     })
+})
+describe('authVaildate.js suite', function () {
+  it('should callback with null, true', function () {
+    
   })
 })

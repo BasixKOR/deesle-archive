@@ -1,3 +1,7 @@
 reset
 node_modules
 bower_components
+.vscode/
+npm-debug.log
+eslint-local
+setting.json

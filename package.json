@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
@@ -32,10 +33,15 @@
     "js-htmlencode": "^0.2.0",
     "jsonfile": "^2.4.0",
     "jsonwebtoken": "^7.2.1",
+    "loadash": "0.0.1",
     "mongoose": "^4.6.0",
     "pug": "^2.0.0-beta6",
-    "tokenizr": "^1.1.1",
-    "underscore": "^1.8.3",
     "vision": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1"
   }
 }

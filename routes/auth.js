@@ -1,11 +1,11 @@
 module.exports = {
-    signin(req, reply) {
-        
-    },
-    signout(req, reply) {
+  signin (req, reply) {
 
-    },
-    register(req, reply) {
-        
-    }
+  },
+  signout (req, reply) {
+
+  },
+  register (req, reply) {
+
+  }
 }
