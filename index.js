@@ -36,6 +36,10 @@ db.once('open', function () {
       server.register(require('inert'), mainHandler)
     })
   })
+  server.start(err => {
+    if (err) throw err
+    console.log(`Server running at: ${server.info.uri}`)
+  })
 })
 mongoose.connect(setting.mongoUrl)
 
@@ -80,7 +84,3 @@ function mainHandler (err) {
     { method: 'GET', path: '/register', handler: handlers.auth.register, auth: util.auth('try') }
   ])
 }
-server.start(err => {
-  if (err) throw err
-  console.log(`Server running at: ${server.info.uri}`)
-})
