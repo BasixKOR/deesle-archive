@@ -32,14 +32,15 @@ describe('util.js suite', function () {
     })
   })
 })
-describe('namumark suite', function() {
-  it('result should be like <p><strong></strong></p>', function() {
+describe('namumark suite', function () {
+  it('result should be like <p><strong></strong></p>', function () {
     namumark("tokenizr '''test'''\n\n", (err, value) => {
+      if (err) throw err
       expect(value).to.equal('tokenizr <strong>test</strong>')
     })
+  })
 })
 describe('authVaildate.js suite', function () {
   it('should callback with null, true', function () {
-    
   })
 })
