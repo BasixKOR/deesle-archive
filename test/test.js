@@ -1,5 +1,6 @@
 var expect = require('expect.js')
 var util = require('../utils/util')
+const namumark = require(`../utils/namumark`)
 const authVaildate = require(`../utils/authVaildate`) // eslint-disable-line no-unused-vars
 
 describe('util.js suite', function () {
@@ -31,8 +32,14 @@ describe('util.js suite', function () {
     })
   })
 })
+describe('namumark suite', function() {
+  it('result should be like <p><strong></strong></p>', function() {
+    namumark("tokenizr '''test'''\n\n", (err, value) => {
+      expect(value).to.equal('tokenizr <strong>test</strong>')
+    })
+})
 describe('authVaildate.js suite', function () {
   it('should callback with null, true', function () {
-
+    
   })
 })
