@@ -1,7 +1,11 @@
 # deesle
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-[![Travis](https://img.shields.io/travis/deesle/deesle.svg?style=flat-square)]() [![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg?style=flat-square)]() [![](https://img.shields.io/github/issues-pr-raw/cdnjs/cdnjs.svg?style=flat-square)]() [![Trello](https://img.shields.io/badge/trello-here-blue.svg?style=flat-square)]() [![GitHub contributors](https://img.shields.io/github/contributors/cdnjs/cdnjs.svg?style=flat-square)]()
+[![Travis](https://img.shields.io/travis/deesle/deesle.svg?style=flat-square)]()
+[![GitHub issues](https://img.shields.io/github/issues/deesle/deesle.svg?style=flat-square)](https://github.com/deesle/deesle/issues)
+[![GitHub Pull Request](https://img.shields.io/github/issues-pr-raw/deesle/deesle.svg?style=flat-square)](https://github.com/deesle/deesle/pulls)
+[![Trello](https://img.shields.io/badge/trello-here-blue.svg?style=flat-square)](https://trello.com/b/imPxPsBn/deesle)
+[![GitHub contributors](https://img.shields.io/github/contributors/deesle/deesle.svg?style=flat-square)](https://github.com/deesle/deesle/graphs/contributors)
 
 
 **현재 개발중입니다.**
