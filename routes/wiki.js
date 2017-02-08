@@ -5,7 +5,7 @@ const namumark = require(`${__dirname}/../utils/namumark`)
 const Doc = require(`${__dirname}/../utils/schema/Doc`)
 const setting = require(`${__dirname}/../setting`)
 module.exports = {
-    // GET / == 대문으로 연결시킨다.
+  // GET / == 대문으로 연결시킨다.
   'root': function (req, reply) {
     if (setting.needSetup) { // 설치가 되지 않았거나 안 된 경우
       return reply('설치를 시작합니다.').redirect().location(`/setup`) // 설치로 이동합니다.
@@ -36,29 +36,29 @@ module.exports = {
   // GET /edit/{name} == 위키 페이지를 편집합니다.
   'edit': function (request, reply) {
     Doc.findOne({name: request.params.name}).exec()
-            .then((doc) => {
-              if (_.isNull(doc)) {
-                reply.view('edit', {
-                  name: request.params.name,
-                  content: '',
-                  settings: setting
-                })
-              } else {
-                reply.view('edit', {
-                  name: request.params.name,
-                  content: _.last(doc.reversion).content,
-                  settings: setting
-                })
-              }
-            })
-            .catch((err) => {
-              console.error(err)
-              reply.view('edit', {
-                name: request.params.name,
-                content: '오류가 발생했어요! 혹시 빈 문서가 아니라면, 다시 편집버튼을 눌러주세요!',
-                settings: setting
-              })
-            })
+      .then((doc) => {
+        if (_.isNull(doc)) {
+          reply.view('edit', {
+            name: request.params.name,
+            content: '',
+            settings: setting
+          })
+        } else {
+          reply.view('edit', {
+            name: request.params.name,
+            content: _.last(doc.reversion).content,
+            settings: setting
+          })
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+        reply.view('edit', {
+          name: request.params.name,
+          content: '오류가 발생했어요! 혹시 빈 문서가 아니라면, 다시 편집버튼을 눌러주세요!',
+          settings: setting
+        })
+      })
   },
   // POST /edit/{name} == 편집이 끝나고 데이터를 받아옵니다.
   'edited': function (request, reply) {
