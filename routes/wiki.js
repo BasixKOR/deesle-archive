@@ -30,7 +30,7 @@ module.exports = {
           content: parsed,
           settings: setting
         })
-      })
+      }).catch(err => { throw err })
     })
   },
   // GET /edit/{name} == 위키 페이지를 편집합니다.
@@ -40,7 +40,7 @@ module.exports = {
         if (_.isNull(doc)) {
           reply.view('edit', {
             name: request.params.name,
-            content: '',
+            content: '없는 문서입니다. 편집시 새로 생성됩니다.',
             settings: setting
           })
         } else {
