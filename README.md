@@ -1,4 +1,9 @@
 # deesle
+[![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+[![Travis](https://img.shields.io/travis/deesle/deesle.svg?style=flat-square)]()
+
+
 **현재 개발중입니다.**
  
 ## 개요
