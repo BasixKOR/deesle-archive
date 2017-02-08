@@ -30,7 +30,7 @@ module.exports = {
           content: parsed,
           settings: setting
         })
-      }).catch(err => { throw err })
+      }).catch(console.error)
     })
   },
   // GET /edit/{name} == 위키 페이지를 편집합니다.
