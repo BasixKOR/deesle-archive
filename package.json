@@ -25,7 +25,7 @@
   "homepage": "https://github.com/deesle/deesle#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
-    "expect.js": "^0.3.1",
+    "chai": "^3.5.0",
     "hapi": "^15.0.3",
     "hapi-auth-jwt2": "^7.2.4",
     "hoek": "^4.0.2",
@@ -36,6 +36,7 @@
     "loadash": "0.0.1",
     "mongoose": "^4.6.0",
     "pug": "^2.0.0-beta6",
+    "tokenizr": "^1.1.1",
     "vision": "^4.1.0"
   },
   "devDependencies": {

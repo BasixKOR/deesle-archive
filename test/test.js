@@ -1,4 +1,4 @@
-var expect = require('expect.js')
+var expect = require('chai').expect
 var util = require('../utils/util')
 const namumark = require(`../utils/namumark`)
 const authVaildate = require(`../utils/authVaildate`) // eslint-disable-line no-unused-vars
