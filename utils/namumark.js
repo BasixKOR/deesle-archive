@@ -16,8 +16,8 @@ module.exports = function namumark (nmText, cb) {
 
     lexer.debug = true
     lexer.input(nmText.replace(/(.+)\n\n/g, '<p>$1</p>'))
-    let result = lexer.tokens() // eslint-disable-line no-unused-vars
+    // let result = lexer.tokens() // eslint-disable-line no-unused-vars
     return resolve(nmText) // 작동을 위한 임시 처리
-    resolve(result.map(n => n.value).join(''), result) // eslint-disable-line no-unreachable
+    // resolve(result.map(n => n.value).join(''), result) // eslint-disable-line no-unreachable
   })
 }
