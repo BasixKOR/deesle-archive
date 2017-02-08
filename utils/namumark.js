@@ -8,14 +8,16 @@ function expectWord (...words) {
 }
 module.exports = function namumark (nmText, cb) {
   // cb(err, result, tokens)
-  let lexer = new Tokenizr()
+  return new Promise(function (resolve, reject) {
+    let lexer = new Tokenizr()
 
-  lexer.rule(expectWord("'''"), (ctx, match) => ctx.accept('normal'))
-  lexer.rule(/'''(.+)'''/, (ctx, match) => ctx.accept('bold', `<strong>${match[1]}</strong>`))
+    lexer.rule(expectWord("'''"), (ctx, match) => ctx.accept('normal'))
+    lexer.rule(/'''(.+)'''/, (ctx, match) => ctx.accept('bold', `<strong>${match[1]}</strong>`))
 
-  lexer.debug = true
-  lexer.input(nmText.replace(/(.+)\n\n/g, '<p>$1</p>'))
-  let result = lexer.tokens() // eslint-disable-line no-unused-vars
-  return cb(nmText) // 작동을 위한 임시 처리
-  cb(null, result.map(n => n.value).join(''), result) // eslint-disable-line no-unreachable
+    lexer.debug = true
+    lexer.input(nmText.replace(/(.+)\n\n/g, '<p>$1</p>'))
+    let result = lexer.tokens() // eslint-disable-line no-unused-vars
+    return resolve(nmText) // 작동을 위한 임시 처리
+    resolve(result.map(n => n.value).join(''), result) // eslint-disable-line no-unreachable
+  })
 }

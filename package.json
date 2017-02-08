@@ -26,6 +26,7 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "hapi": "^15.0.3",
     "hapi-auth-jwt2": "^7.2.4",
     "hoek": "^4.0.2",

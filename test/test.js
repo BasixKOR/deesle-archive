@@ -1,4 +1,7 @@
-var expect = require('chai').expect
+var chai = require('chai')
+chai.use(require('chai-as-promised'))
+
+var expect = chai.expect
 var util = require('../utils/util')
 const namumark = require(`../utils/namumark`)
 const authVaildate = require(`../utils/authVaildate`) // eslint-disable-line no-unused-vars
@@ -34,10 +37,7 @@ describe('util.js suite', function () {
 })
 describe('namumark suite', function () {
   it('result should be like <p><strong></strong></p>', function () {
-    namumark("tokenizr '''test'''\n\n", (err, value) => {
-      if (err) throw err
-      expect(value).to.equal('tokenizr <strong>test</strong>')
-    })
+    expect(namumark("tokenizr '''test'''\n\n")).to.eventually.equal('tokenizr <strong>test</strong>')
   })
 })
 describe('authVaildate.js suite', function () {

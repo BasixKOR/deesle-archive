@@ -24,7 +24,7 @@ module.exports = {
           settings: setting
         }).code(404)
       }
-      namumark(_.last(docs.reversion).content, function (parsed) {
+      namumark(_.last(docs.reversion).content).then(parsed => {
         reply.view('view', {
           name: request.params.name,
           content: parsed,
