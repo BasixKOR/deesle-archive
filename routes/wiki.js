@@ -62,6 +62,7 @@ module.exports = {
   },
   // POST /edit/{name} == 편집이 끝나고 데이터를 받아옵니다.
   'edited': function (request, reply) {
+    console.log(request.auth.credentials)
     Doc.findOne({name: request.params.name}).exec()
       .then((doc) => {
         doc.reversion.push({
